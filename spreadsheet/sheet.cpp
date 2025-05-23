@@ -71,8 +71,7 @@ void Sheet::PrintValues(std::ostream& output) const {
         for (int cl=0; cl<size_.cols; ++cl) {
             if (cl > 0) output<<"\t"s;
 
-            if (auto itr = cells_.find({rw, cl}); itr != cells_.end() && itr->second != nullptr
-                    && !itr->second->GetText().empty())
+            if (auto itr = cells_.find({rw, cl}); itr != cells_.end() && itr->second != nullptr)
                 std::visit([&](const auto value) { output << value; }, itr->second->GetValue());
         }
         output<<"\n"s;    
@@ -84,8 +83,7 @@ void Sheet::PrintTexts(std::ostream& output) const {
         for (int cl=0; cl<size_.cols; ++cl) {
             if (cl > 0) output<<"\t"s;
 
-            if (auto itr = cells_.find({rw, cl}); itr != cells_.end() && itr->second != nullptr
-                    && !itr->second->GetText().empty())
+            if (auto itr = cells_.find({rw, cl}); itr != cells_.end() && itr->second != nullptr)
                 output<<itr->second->GetText();
         }
         output<<"\n"s;
